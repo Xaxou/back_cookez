@@ -1,4 +1,7 @@
 <h1>Installation</h2>
+<h3>Installation de symfony.</h3>
+<a href="https://symfony.com/download">Télécharger symfony</a>
+<hr>
 
 <h3>Mise en place de la base de données.</h3>
 <ul>
@@ -8,6 +11,7 @@
     <li><code>php bin/console make:migration</code></li>
     <li><code>php bin/console doctrine:migrations:migrate</code></li>
 </ul>
+<hr>
 
 <h3>Génération de la clé de sécurité</h3>
 <h4>Installation de OpenSSL</h4>
@@ -17,9 +21,9 @@
 <p>Effectuer les commandes suivantes :</p>
 <ul>
     <li><code>C:\Program Files\OpenSSL-Win64\bin\openssl.exe</code></li>
-    <li><code>genrsa -out config/jwt/private.pem -aes256 4096</code>)</li>
+    <li><code>genrsa -out config/jwt/private.pem -aes256 4096</code></li>
     <li><code>rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem</code></li>
 </ul>
-<h3>Démarrage du serveur</h3>
+<h3>Démarrage du serveur.</h3>
 <p><code>symfony server:start</code></p>
 
