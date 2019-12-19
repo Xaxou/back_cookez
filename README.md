@@ -15,7 +15,7 @@
 
 <h3>Génération de la clé de sécurité</h3>
 <h4>Installation de OpenSSL</h4>
-<p>Télécharger OpenSSL via le lie suivant : <a href="https://slproweb.com/products/Win32OpenSSL.html"> Télécharger OpenSSL</a></p>
+<p>Télécharger OpenSSL via le lien suivant : <a href="https://slproweb.com/products/Win32OpenSSL.html"> Télécharger OpenSSL</a></p>
 <p>Ne pas oublier de récupèrer le passphrase dans le fichier <code>.env</code></p>
 <hr>
 <p>Effectuer les commandes suivantes :</p>
