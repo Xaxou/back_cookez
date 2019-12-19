@@ -20,6 +20,7 @@
 <hr>
 <p>Effectuer les commandes suivantes :</p>
 <ul>
+    <li><code>mkdir config\jwt</code></li>
     <li><code>C:\Program Files\OpenSSL-Win64\bin\openssl.exe</code></li>
     <li><code>genrsa -out config/jwt/private.pem -aes256 4096</code></li>
     <li><code>rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem</code></li>
