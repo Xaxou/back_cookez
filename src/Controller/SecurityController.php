@@ -26,8 +26,7 @@ class SecurityController extends AbstractController
         if(isset($values->email,$values->password)) {
             $user = new User();
             $user->setEmail($values->email);
-            $user->setPassword($passwordEncoder->encodePassword($user,
-                $values->password));
+            $user->setPassword($passwordEncoder->encodePassword($user, $values->password));
             $user->setRoles($user->getRoles());
             $errors = $validator->validate($user);
             if(count($errors)) {
