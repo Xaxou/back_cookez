@@ -5,6 +5,7 @@
     <li><code>cd back_cookez</code></li>
     <li><code>composer install</code></li>
     <li><code>php bin/console doctrine:database:create</code></li>
+    <li><code>php bin/console make:migration</code></li>
     <li><code>php bin/console doctrine:migrations:migrate</code></li>
 </ul>
 
