@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 
 /**
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"types"}})
  * @ORM\Entity(repositoryClass="App\Repository\RecettesRepository")
  */
 class Recettes
@@ -17,31 +21,37 @@ class Recettes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("types")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("types")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("types")
      */
     private $difficulte;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("types")
      */
-    private $temps_prepa;
+    private $tempsprepa;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("types")
      */
-    private $temps_cuisson;
+    private $tempscuisson;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Groups("types")
      */
     private $conseil;
 
@@ -90,26 +100,26 @@ class Recettes
         return $this;
     }
 
-    public function getTempsPrepa(): ?string
+    public function getTempsprepa(): ?string
     {
-        return $this->temps_prepa;
+        return $this->tempsprepa;
     }
 
-    public function setTempsPrepa(string $temps_prepa): self
+    public function setTempsprepa(string $tempsprepa): self
     {
-        $this->temps_prepa = $temps_prepa;
+        $this->tempsprepa = $tempsprepa;
 
         return $this;
     }
 
-    public function getTempsCuisson(): ?string
+    public function getTempscuisson(): ?string
     {
-        return $this->temps_cuisson;
+        return $this->tempscuisson;
     }
 
-    public function setTempsCuisson(string $temps_cuisson): self
+    public function setTempscuisson(string $tempscuisson): self
     {
-        $this->temps_cuisson = $temps_cuisson;
+        $this->tempscuisson = $tempscuisson;
 
         return $this;
     }

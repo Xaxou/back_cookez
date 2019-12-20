@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
- * @ApiResource()
+ * @ApiResource(attributes={
+ *     "normalization_context": {"groups"={"types"}}, "fetchEager": true
+ *     })
  * @ORM\Entity(repositoryClass="App\Repository\TypesRepository")
  */
 class Types
@@ -17,18 +22,28 @@ class Types
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"types"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"types"})
      */
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Recettes", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="App\Entity\Recettes", mappedBy="type", fetch="EAGER")
+     * @Groups({"types"})
+     *
      */
     private $recettes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"types"})
+     */
+    private $image;
 
     public function __construct()
     {
@@ -86,5 +101,17 @@ class Types
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

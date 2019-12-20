@@ -9,3 +9,5 @@ api_platform:
                 name: Authorization
                 type: header
         versions: [3]
+    eager_loading:
+        max_joins: 100
