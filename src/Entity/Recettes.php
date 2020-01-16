@@ -12,7 +12,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
- * @ApiResource(normalizationContext={"groups"={"types"}})
+ * @ApiResource(attributes={
+ *     "normalization_context": {"groups"={"types", "recettes"}}, "fetchEager": true
+ * })
  * @ORM\Entity(repositoryClass="App\Repository\RecettesRepository")
  */
 class Recettes
@@ -21,37 +23,37 @@ class Recettes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("types")
+     * @Groups({"types", "recettes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("types")
+     * @Groups({"types", "recettes"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("types")
+     * @Groups({"types", "recettes"})
      */
     private $difficulte;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("types")
+     * @Groups({"types", "recettes"})
      */
     private $tempsprepa;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("types")
+     * @Groups({"types", "recettes"})
      */
     private $tempscuisson;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("types")
+     * @Groups({"types", "recettes"})
      */
     private $conseil;
 
@@ -63,6 +65,7 @@ class Recettes
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredients", inversedBy="recettes")
+     * @Groups({"types", "recettes"})
      */
     private $ingredients;
 
