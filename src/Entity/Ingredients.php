@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
- * @ApiResource(normalizationContext={"groups"={"categories", "recettes", "ingredients"}})
+ * @ApiResource(normalizationContext={"groups"={"ingredients", "catingredient"}})
  * @ORM\Entity(repositoryClass="App\Repository\IngredientsRepository")
  */
 class Ingredients
@@ -19,26 +19,41 @@ class Ingredients
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"categories", "recettes", "ingredients"})
+     * @Groups({"categories", 
+     *          "recettes", 
+     *          "ingredients",
+     *          "catingredient", 
+     *          "types"
+     *      })
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"categories", "recettes", "ingredients"})
+     * @Groups({"categories", 
+     *          "recettes", 
+     *          "ingredients",
+     *          "catingredient", 
+     *          "types"
+     *         })
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"categories", "recettes", "ingredients"})
+     * @Groups({"categories", 
+     *          "recettes", 
+     *          "ingredients",
+     *          "catingredient", 
+     *          "types"
+     *         })
      */
     private $code;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="ingredients")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"ingredients", "recettes"})
+     * @Groups({"recettes", "catingredient"})
      * 
      */
     private $categorie;

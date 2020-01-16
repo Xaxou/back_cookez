@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(attributes={
- *     "normalization_context": {"groups"={"categories", "ingredients"}}, "fetchEager": true
+ *     "normalization_context": {"groups"={"categories"}}, "fetchEager": true
  * })
  * @ORM\Entity(repositoryClass="App\Repository\CategoriesRepository")
  */
@@ -22,7 +22,9 @@ class Categories
      * @ORM\Column(type="integer")
      * @Groups({"categories", 
      *          "ingredients", 
-     *          "recettes"})
+     *          "recettes",
+     *          "catingredient"
+     *         })
      */
     private $id;
 
@@ -30,7 +32,9 @@ class Categories
      * @ORM\Column(type="string", length=255)
      * @Groups({"categories",
      *          "ingredients", 
-     *          "recettes"})
+     *          "recettes",
+     *          "catingredient"
+     *         })
      */
     private $nom;
 

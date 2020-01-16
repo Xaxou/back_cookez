@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(attributes={
- *     "normalization_context": {"groups"={"types", "recettes"}}, "fetchEager": true
+ *     "normalization_context": {"groups"={"recettes"}}, "fetchEager": true
  * })
  * @ORM\Entity(repositoryClass="App\Repository\RecettesRepository")
  */
