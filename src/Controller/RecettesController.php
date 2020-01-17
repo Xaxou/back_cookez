@@ -26,6 +26,16 @@ class RecettesController extends AbstractController
     }
 
     /**
+     * @Route("/byingredients", name="recettes_by_ingredients", methods={"GET"})
+     */
+    public function recettesByIngredients(RecettesRepository $recettesRepository): Response
+    {
+        return $this->render('recettes/index.html.twig', [
+            'recettes' => $recettesRepository->findByIngredients('1,2,3'),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="recettes_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
