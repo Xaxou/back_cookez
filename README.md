@@ -1,6 +1,10 @@
 <h1>Installation</h2>
 <h3>Installation de symfony.</h3>
 <a href="https://symfony.com/download">Télécharger symfony</a>
+<h3>Installation de composer.</h3>
+<a href="https://getcomposer.org/download/">Télécharger composer</a>
+<h3>Installation de xampp.</h3>
+<a href="https://www.apachefriends.org/fr/index.html">Télécharger xampp</a>
 <hr>
 
 <h3>Mise en place de la base de données.</h3>
