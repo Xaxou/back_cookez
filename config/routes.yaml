@@ -4,7 +4,6 @@ index:
 api_login_check:
     path: /api/login_check
     methods: ['POST']
-
 authentication_token:
     path: /authentication_token
     methods: ['POST']
