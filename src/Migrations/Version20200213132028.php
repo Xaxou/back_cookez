@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191219125442 extends AbstractMigration
+final class Version20200213132028 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,10 @@ final class Version20191219125442 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE ingredients CHANGE categorie_id categorie_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE recettes ADD createur_id INT NOT NULL');
+        $this->addSql('ALTER TABLE recettes ADD CONSTRAINT FK_EB48E72C73A201E5 FOREIGN KEY (createur_id) REFERENCES user (id)');
+        $this->addSql('CREATE INDEX IDX_EB48E72C73A201E5 ON recettes (createur_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +33,9 @@ final class Version20191219125442 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE user');
+        $this->addSql('ALTER TABLE ingredients CHANGE categorie_id categorie_id INT NOT NULL');
+        $this->addSql('ALTER TABLE recettes DROP FOREIGN KEY FK_EB48E72C73A201E5');
+        $this->addSql('DROP INDEX IDX_EB48E72C73A201E5 ON recettes');
+        $this->addSql('ALTER TABLE recettes DROP createur_id');
     }
 }

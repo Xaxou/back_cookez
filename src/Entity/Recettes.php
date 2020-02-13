@@ -69,6 +69,12 @@ class Recettes
      */
     private $ingredients;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recettes")
+     * @Groups({"types", "users"})
+     */
+    private $createur;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -173,6 +179,18 @@ class Recettes
         if ($this->ingredients->contains($ingredient)) {
             $this->ingredients->removeElement($ingredient);
         }
+
+        return $this;
+    }
+
+    public function getCreateur(): ?User
+    {
+        return $this->createur;
+    }
+
+    public function setCreateur(?User $createur): self
+    {
+        $this->createur = $createur;
 
         return $this;
     }

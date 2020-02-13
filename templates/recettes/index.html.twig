@@ -14,6 +14,7 @@
                 <th>Temps_prepa</th>
                 <th>Temps_cuisson</th>
                 <th>Conseil</th>
+                <th>Créateur</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@
                 <td>{{ recette.tempsPrepa }}</td>
                 <td>{{ recette.tempsCuisson }}</td>
                 <td>{{ recette.conseil }}</td>
+                <td>{{ recette.createur }}</td>
                 <td>
                     <a href="{{ path('recettes_show', {'id': recette.id}) }}">show</a>
                     <a href="{{ path('recettes_edit', {'id': recette.id}) }}">edit</a>
