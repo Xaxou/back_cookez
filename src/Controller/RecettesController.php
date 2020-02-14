@@ -28,11 +28,10 @@ class RecettesController extends AbstractController
     /**
      * @Route("/byingredients", name="recettes_by_ingredients", methods={"GET"})
      */
-    public function recettesByIngredients(RecettesRepository $recettesRepository): Response
+    public function recettesByIngredients(RecettesRepository $recettesRepository): Array
     {
-        return $this->render('recettes/index.html.twig', [
-            'recettes' => $recettesRepository->findByIngredients('1,2,3'),
-        ]);
+       $recettes = $recettesRepository->findByIngredients('2,3');
+       return $recettes;   
     }
 
     /**

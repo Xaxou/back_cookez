@@ -9,7 +9,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
+/* @ApiResource(
+*  collectionOperations={
+*      "get","post",
+*      "collName_api_me"={"route_name"="recette_ingredient"}
+*  }
+* )
+*/
 
 /**
  * @ApiResource(attributes={
@@ -75,9 +81,21 @@ class Recettes
      */
     private $createur;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notes", mappedBy="recette")
+     */
+    private $notes;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"types", "recettes"})
+     */
+    private $statut;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,5 +211,53 @@ class Recettes
         $this->createur = $createur;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Notes[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Notes $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Notes $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getRecette() === $this) {
+                $note->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 }
