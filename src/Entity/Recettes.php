@@ -9,13 +9,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/* @ApiResource(
-*  collectionOperations={
-*      "get","post",
-*      "collName_api_me"={"route_name"="recette_ingredient"}
-*  }
-* )
-*/
 
 /**
  * @ApiResource(attributes={
@@ -92,10 +85,16 @@ class Recettes
      */
     private $statut;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Etapes", mappedBy="recette")
+     */
+    private $etapes;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->etapes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -259,5 +258,36 @@ class Recettes
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    /**
+     * @return Collection|Etapes[]
+     */
+    public function getEtapes(): Collection
+    {
+        return $this->etapes;
+    }
+
+    public function addEtape(Etapes $etape): self
+    {
+        if (!$this->etapes->contains($etape)) {
+            $this->etapes[] = $etape;
+            $etape->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtape(Etapes $etape): self
+    {
+        if ($this->etapes->contains($etape)) {
+            $this->etapes->removeElement($etape);
+            // set the owning side to null (unless already changed)
+            if ($etape->getRecette() === $this) {
+                $etape->setRecette(null);
+            }
+        }
+
+        return $this;
     }
 }
