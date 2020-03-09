@@ -17,6 +17,7 @@ class RecettesType extends AbstractType
             ->add('tempsprepa')
             ->add('tempscuisson')
             ->add('conseil')
+            ->add('statut')
             ->add('type')
             ->add('ingredients')
             ->add('createur')
