@@ -21,6 +21,8 @@ class RecettesType extends AbstractType
             ->add('type')
             ->add('ingredients')
             ->add('createur')
+            ->add('etapes')
+
         ;
     }
 

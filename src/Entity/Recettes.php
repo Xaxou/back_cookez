@@ -51,12 +51,6 @@ class Recettes
     private $tempscuisson;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"types", "recettes"})
-     */
-    private $conseil;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Types", inversedBy="recettes")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -90,11 +84,32 @@ class Recettes
      */
     private $etapes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
+     */
+    private $etiquettes;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbr_personnes;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $prepa_text;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $cuisson_text;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->etapes = new ArrayCollection();
+        $this->etiquettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,18 +161,6 @@ class Recettes
     public function setTempscuisson(string $tempscuisson): self
     {
         $this->tempscuisson = $tempscuisson;
-
-        return $this;
-    }
-
-    public function getConseil(): ?string
-    {
-        return $this->conseil;
-    }
-
-    public function setConseil(?string $conseil): self
-    {
-        $this->conseil = $conseil;
 
         return $this;
     }
@@ -287,6 +290,68 @@ class Recettes
                 $etape->setRecette(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Etiquettes[]
+     */
+    public function getEtiquettes(): Collection
+    {
+        return $this->etiquettes;
+    }
+
+    public function addEtiquette(Etiquettes $etiquette): self
+    {
+        if (!$this->etiquettes->contains($etiquette)) {
+            $this->etiquettes[] = $etiquette;
+        }
+
+        return $this;
+    }
+
+    public function removeEtiquette(Etiquettes $etiquette): self
+    {
+        if ($this->etiquettes->contains($etiquette)) {
+            $this->etiquettes->removeElement($etiquette);
+        }
+
+        return $this;
+    }
+
+    public function getNbrPersonnes(): ?int
+    {
+        return $this->nbr_personnes;
+    }
+
+    public function setNbrPersonnes(int $nbr_personnes): self
+    {
+        $this->nbr_personnes = $nbr_personnes;
+
+        return $this;
+    }
+
+    public function getPrepaText(): ?string
+    {
+        return $this->prepa_text;
+    }
+
+    public function setPrepaText(string $prepa_text): self
+    {
+        $this->prepa_text = $prepa_text;
+
+        return $this;
+    }
+
+    public function getCuissonText(): ?string
+    {
+        return $this->cuisson_text;
+    }
+
+    public function setCuissonText(?string $cuisson_text): self
+    {
+        $this->cuisson_text = $cuisson_text;
 
         return $this;
     }

@@ -12,6 +12,6 @@ api_recettes_ingredients:
     path: '/api/recettes_ingredients'
     methods: ['GET']
     defaults:
-        _controller: '\App\Controller\RecettesController::recettesByIngredients'
+        _controller: '\App\Controller\ApiRoutesController::recettesByIngredients'
         _api_resource_class: 'App\Entity\Recettes'
         _api_collection_operation_name: 'collName_api_me'

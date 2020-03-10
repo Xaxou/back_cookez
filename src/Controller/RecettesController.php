@@ -26,15 +26,6 @@ class RecettesController extends AbstractController
     }
 
     /**
-     * @Route("/byingredients", name="recettes_by_ingredients", methods={"GET"})
-     */
-    public function recettesByIngredients(RecettesRepository $recettesRepository): Array
-    {
-       $recettes = $recettesRepository->findByIngredients('2,3');
-       return $recettes;   
-    }
-
-    /**
      * @Route("/new", name="recettes_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
