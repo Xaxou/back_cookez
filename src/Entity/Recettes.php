@@ -22,7 +22,7 @@ class Recettes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"types", "recettes"})
+     * @Groups({"types", "recettes" , "etapes"})
      */
     private $id;
 
@@ -53,6 +53,7 @@ class Recettes
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Types", inversedBy="recettes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"recettes"})
      */
     private $type;
 
@@ -64,7 +65,7 @@ class Recettes
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recettes")
-     * @Groups({"types", "users"})
+     * @Groups({"types", "recettes" })
      */
     private $createur;
 
@@ -99,7 +100,7 @@ class Recettes
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"types", "recettes"})
+     * @Groups({"types", "recettes" , "etapes"})
      */
     private $prepa_text;
 

@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
- * @ApiResource(normalizationContext={"groups"={"recettes"}})
+ * @ApiResource(normalizationContext={"groups"={"etapes"}})
  * @ORM\Entity(repositoryClass="App\Repository\EtapesRepository")
  */
 class Etapes
@@ -17,30 +17,32 @@ class Etapes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"recettes"})
+     * @Groups({"etapes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"recettes"})
+     * @Groups({"etapes"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"recettes"})
+     * 
      */
     private $numero;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Recettes", inversedBy="etapes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"etapes"})
      */
     private $recette;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"recettes"})
      */
     private $onglet;
 
