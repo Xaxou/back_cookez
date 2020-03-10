@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"recettes"}})
  * @ORM\Entity(repositoryClass="App\Repository\EtapesRepository")
  */
 class Etapes
@@ -15,16 +17,19 @@ class Etapes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"recettes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"recettes"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"recettes"})
      */
     private $numero;
 

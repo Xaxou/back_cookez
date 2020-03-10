@@ -25,13 +25,41 @@ class RecettesRepository extends ServiceEntityRepository
     
     public function findByIngredients($ingredients)
     {
-        return $this->createQueryBuilder('recettes')
-            ->where('recettes.id = :id')
-            ->leftJoin('recettes.ingredients', 'ri')
-            ->setParameter('id', '1')
-            ->orderBy('recettes.id', 'ASC')
+
+        /**Pour chaque ingrédients
+         * On récupère une liste de recettes
+         * 
+         * Ensuite on garde les recettes qui apparaissent sur tous les résultats
+         */
+
+        $recettespack = array();
+        $result = null;
+        $ingredients = [3,5];
+
+        foreach($ingredients as $key => $value){
+            $recettes = $this->createQueryBuilder('r')
+            ->leftJoin('r.ingredients', 'ri')
+            ->where('ri.id = :idingredient')
+            ->setParameter(':idingredient', $value)
+            ->orderBy('r.id', 'ASC')
             ->getQuery()
             ->getResult();
+
+            if(sizeof($recettes) >0){
+                array_push($recettespack, $recettes);
+            }
+        }
+      
+        foreach ($recettespack as $key => $value) {
+            if($key > 0){
+                $tab = $value;
+                $result = array_intersect($tab, $result);
+            }else{
+                $result = $value;
+            }
+        } 
+
+         return $result;
     }
     
 

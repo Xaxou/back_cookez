@@ -81,31 +81,37 @@ class Recettes
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Etapes", mappedBy="recette")
+     * @Groups({"types", "recettes"})
      */
     private $etapes;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
+     * @Groups({"types", "recettes"})
      */
     private $etiquettes;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"types", "recettes"})
      */
     private $nbr_personnes;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"types", "recettes"})
      */
     private $prepa_text;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"types", "recettes"})
      */
     private $cuisson_text;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"types", "recettes"})
      */
     private $image;
 
