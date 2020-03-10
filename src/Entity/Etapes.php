@@ -34,6 +34,11 @@ class Etapes
      */
     private $recette;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $onglet;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,5 +83,17 @@ class Etapes
     public function __toString()
     {
         return $this->getDescription();
+    }
+
+    public function getOnglet(): ?string
+    {
+        return $this->onglet;
+    }
+
+    public function setOnglet(string $onglet): self
+    {
+        $this->onglet = $onglet;
+
+        return $this;
     }
 }
