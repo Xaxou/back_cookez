@@ -92,29 +92,18 @@ class Recettes
      */
     private $etiquettes;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"types", "recettes"})
-     */
-    private $nbr_personnes;
-
-    /**
-     * @ORM\Column(type="text")
-     * @Groups({"types", "recettes" , "etapes"})
-     */
-    private $prepa_text;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"types", "recettes"})
-     */
-    private $cuisson_text;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"types", "recettes"})
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"types", "recettes"})
+     */
+    private $nbrPersonnes;
 
     public function __construct()
     {
@@ -332,42 +321,6 @@ class Recettes
         return $this;
     }
 
-    public function getNbrPersonnes(): ?int
-    {
-        return $this->nbr_personnes;
-    }
-
-    public function setNbrPersonnes(int $nbr_personnes): self
-    {
-        $this->nbr_personnes = $nbr_personnes;
-
-        return $this;
-    }
-
-    public function getPrepaText(): ?string
-    {
-        return $this->prepa_text;
-    }
-
-    public function setPrepaText(string $prepa_text): self
-    {
-        $this->prepa_text = $prepa_text;
-
-        return $this;
-    }
-
-    public function getCuissonText(): ?string
-    {
-        return $this->cuisson_text;
-    }
-
-    public function setCuissonText(?string $cuisson_text): self
-    {
-        $this->cuisson_text = $cuisson_text;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -376,6 +329,18 @@ class Recettes
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getNbrPersonnes(): ?int
+    {
+        return $this->nbrPersonnes;
+    }
+
+    public function setNbrPersonnes(int $nbrPersonnes): self
+    {
+        $this->nbrPersonnes = $nbrPersonnes;
 
         return $this;
     }
