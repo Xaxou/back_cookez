@@ -18,13 +18,13 @@ class Notes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"notes", "recettes"})
+     * @Groups({"notes", "recettes", "types"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"notes", "recettes"})
+     * @Groups({"notes", "recettes", "types"})
      */
     private $etoiles;
 
@@ -37,7 +37,7 @@ class Notes
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"notes", "recettes"})
+     * @Groups({"notes", "recettes", "types"})
      */
     private $user;
 
