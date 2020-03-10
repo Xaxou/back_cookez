@@ -21,8 +21,17 @@ class ApiRoutesController extends AbstractController
     }
 
     /**
-     * @Route("/byingredients", name="recettes_by_ingredients", methods={"GET"})
+     * @Route(
+     *      "/byingredients",
+     *      name="recettes_by_ingredients",
+     *      methods={"GET"},
+     *      defaults={
+     *         "_api_resource_class"=Recettes::class,
+     *         "_api_item_operation_name"="recettes_ingredients"
+     *      } 
+     *  )
      */
+    
     public function recettesByIngredients(RecettesRepository $recettesRepository): Array
     {
        $recettes = $recettesRepository->findByIngredients('2,3');

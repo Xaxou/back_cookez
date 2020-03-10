@@ -17,19 +17,19 @@ class Etapes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"etapes"})
+     * @Groups({"etapes", "recettes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"etapes"})
+     * @Groups({"etapes", "recettes"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     * @Groups({"etapes", "recettes"})
      */
     private $numero;
 

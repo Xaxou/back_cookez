@@ -11,3 +11,15 @@ api_platform:
         versions: [3]
     eager_loading:
         max_joins: 100
+    formats:
+        jsonld:
+            mime_types:
+                - application/ld+json
+        json:
+            mime_types:
+                - application/json
+        html:
+            mime_types:
+                - text/html
+
+
