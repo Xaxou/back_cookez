@@ -99,12 +99,14 @@ class Recettes
     private $nbrPersonnes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="id_recette")
+     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="recette")
+     * @Groups({"recettes"})
      */
     private $preparations;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Cuisson", mappedBy="recette")
+     * @Groups({"recettes"})
      */
     private $cuissons;
 
@@ -330,7 +332,7 @@ class Recettes
     {
         if (!$this->preparations->contains($preparation)) {
             $this->preparations[] = $preparation;
-            $preparation->setIdRecette($this);
+            $preparation->setRecette($this);
         }
 
         return $this;
@@ -341,8 +343,8 @@ class Recettes
         if ($this->preparations->contains($preparation)) {
             $this->preparations->removeElement($preparation);
             // set the owning side to null (unless already changed)
-            if ($preparation->getIdRecette() === $this) {
-                $preparation->setIdRecette(null);
+            if ($preparation->getRecette() === $this) {
+                $preparation->setRecette(null);
             }
         }
 
