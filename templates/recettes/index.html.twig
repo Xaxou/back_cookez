@@ -11,8 +11,9 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Difficulte</th>
-                <th>Temps_prepa</th>
-                <th>Temps_cuisson</th>
+                <th>Temps de préparation</th>
+                <th>Temps de cuisson</th>
+                <th>Nombre de personnes</th>
                 <th>Créateur</th>
                 <th>actions</th>
             </tr>
@@ -25,6 +26,7 @@
                 <td>{{ recette.difficulte }}</td>
                 <td>{{ recette.tempsPrepa }}</td>
                 <td>{{ recette.tempsCuisson }}</td>
+                <td>{{ recette.nbrPersonnes }}</td>
                 <td>{{ recette.createur }}</td>
                 <td>
                     <a href="{{ path('recettes_show', {'id': recette.id}) }}">show</a>
