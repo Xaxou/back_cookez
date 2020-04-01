@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(attributes={
+ *     "normalization_context": {"groups"={"cuisson", "recettes"}}, "fetchEager": true
+ * })
  * @ORM\Entity(repositoryClass="App\Repository\CuissonRepository")
  */
 class Cuisson
@@ -20,6 +23,9 @@ class Cuisson
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"recettes", 
+     *          "cuisson",
+     * })
      */
     private $etapeText;
 
@@ -31,6 +37,9 @@ class Cuisson
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"recettes", 
+     *          "cuisson",
+     * })
      */
     private $numEtape;
 
