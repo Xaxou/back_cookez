@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cuisson index{% endblock %}
+
+{% block body %}
+    <h1>Liste des étapes de cuisson</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Texte étape</th>
+                <th>Id recette</th>
+                <th>Numéro étape</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cuisson in cuissons %}
+            <tr>
+                <td>{{ cuisson.id }}</td>
+                <td>{{ cuisson.etapeText }}</td>
+                <td>{{ cuisson.recette }}</td>
+                <td>{{ cuisson.numEtape }}</td>
+                <td>
+                    <a href="{{ path('cuisson_show', {'id': cuisson.id}) }}">show</a>
+                    <a href="{{ path('cuisson_edit', {'id': cuisson.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cuisson_new') }}">Create new</a>
+{% endblock %}

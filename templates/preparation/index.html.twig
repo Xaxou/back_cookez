@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Préparation index{% endblock %}
+
+{% block body %}
+    <h1>Liste des étapes de préparation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Texte étape</th>
+                <th>Id recette</th>
+                <th>Numéro étape</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for preparation in preparations %}
+            <tr>
+                <td>{{ preparation.id }}</td>
+                <td>{{ preparation.etapeText }}</td>
+                <td>{{ preparation.recette }}</td>
+                <td>{{ preparation.numEtape }}</td>
+                <td>
+                    <a href="{{ path('preparation_show', {'id': preparation.id}) }}">show</a>
+                    <a href="{{ path('preparation_edit', {'id': preparation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('preparation_new') }}">Create new</a>
+{% endblock %}

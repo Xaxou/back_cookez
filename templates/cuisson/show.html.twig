@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Étapes de cuisson{% endblock %}
+
+{% block body %}
+    <h1>Étapes de cuisson</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cuisson.id }}</td>
+            </tr>
+            <tr>
+                <th>Texte étape</th>
+                <td>{{ cuisson.etapeText }}</td>
+            </tr>
+            <tr>
+                <th>Id recette</th>
+                <td>{{ cuisson.recette }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de l'étape</th>
+                <td>{{ cuisson.numEtape }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cuisson_index') }}">back to list</a>
+
+    <a href="{{ path('cuisson_edit', {'id': cuisson.id}) }}">edit</a>
+
+    {{ include('cuisson/_delete_form.html.twig') }}
+{% endblock %}

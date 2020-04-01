@@ -105,12 +105,24 @@ class Recettes
      */
     private $nbrPersonnes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="id_recette")
+     */
+    private $preparations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cuisson", mappedBy="recette")
+     */
+    private $cuissons;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->etapes = new ArrayCollection();
         $this->etiquettes = new ArrayCollection();
+        $this->preparations = new ArrayCollection();
+        $this->cuissons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -341,6 +353,68 @@ class Recettes
     public function setNbrPersonnes(int $nbrPersonnes): self
     {
         $this->nbrPersonnes = $nbrPersonnes;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Preparation[]
+     */
+    public function getPreparations(): Collection
+    {
+        return $this->preparations;
+    }
+
+    public function addPreparation(Preparation $preparation): self
+    {
+        if (!$this->preparations->contains($preparation)) {
+            $this->preparations[] = $preparation;
+            $preparation->setIdRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removePreparation(Preparation $preparation): self
+    {
+        if ($this->preparations->contains($preparation)) {
+            $this->preparations->removeElement($preparation);
+            // set the owning side to null (unless already changed)
+            if ($preparation->getIdRecette() === $this) {
+                $preparation->setIdRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cuisson[]
+     */
+    public function getCuissons(): Collection
+    {
+        return $this->cuissons;
+    }
+
+    public function addCuisson(Cuisson $cuisson): self
+    {
+        if (!$this->cuissons->contains($cuisson)) {
+            $this->cuissons[] = $cuisson;
+            $cuisson->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCuisson(Cuisson $cuisson): self
+    {
+        if ($this->cuissons->contains($cuisson)) {
+            $this->cuissons->removeElement($cuisson);
+            // set the owning side to null (unless already changed)
+            if ($cuisson->getRecette() === $this) {
+                $cuisson->setRecette(null);
+            }
+        }
 
         return $this;
     }

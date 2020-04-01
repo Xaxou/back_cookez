@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer une étape de cuisson{% endblock %}
+
+{% block body %}
+    <h1>Éditer une étape de cuisson</h1>
+
+    {{ include('cuisson/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cuisson_index') }}">back to list</a>
+
+    {{ include('cuisson/_delete_form.html.twig') }}
+{% endblock %}
