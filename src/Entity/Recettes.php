@@ -71,6 +71,7 @@ class Recettes
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Notes", mappedBy="recette")
+     * @Groups({"types", "recettes"})
      */
     private $notes;
 

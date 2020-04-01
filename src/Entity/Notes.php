@@ -5,9 +5,11 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"notes"}})
  * @ORM\Entity(repositoryClass="App\Repository\NotesRepository")
  */
 class Notes
@@ -16,11 +18,13 @@ class Notes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"notes", "recettes", "types"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"notes", "recettes", "types"})
      */
     private $etoiles;
 
@@ -33,6 +37,7 @@ class Notes
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"notes", "recettes", "types"})
      */
     private $user;
 
