@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Etiquettes;
+use App\Entity\Etiquette;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Etiquettes|null find($id, $lockMode = null, $lockVersion = null)
- * @method Etiquettes|null findOneBy(array $criteria, array $orderBy = null)
- * @method Etiquettes[]    findAll()
- * @method Etiquettes[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Etiquette|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Etiquette|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Etiquette[]    findAll()
+ * @method Etiquette[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EtiquettesRepository extends ServiceEntityRepository
+class EtiquetteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Etiquettes::class);
+        parent::__construct($registry, Etiquette::class);
     }
 
     // /**
-    //  * @return Etiquettes[] Returns an array of Etiquettes objects
+    //  * @return Etiquette[] Returns an array of Etiquette objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EtiquettesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Etiquettes
+    public function findOneBySomeField($value): ?Etiquette
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

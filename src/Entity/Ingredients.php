@@ -58,9 +58,15 @@ class Ingredients
      */
     private $categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Quantite", mappedBy="ingredient")
+     */
+    private $quantites;
+
 
     public function __construct()
     {
+        $this->quantites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,6 +113,37 @@ class Ingredients
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    /**
+     * @return Collection|Quantite[]
+     */
+    public function getQuantites(): Collection
+    {
+        return $this->quantites;
+    }
+
+    public function addQuantite(Quantite $quantite): self
+    {
+        if (!$this->quantites->contains($quantite)) {
+            $this->quantites[] = $quantite;
+            $quantite->setIngredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuantite(Quantite $quantite): self
+    {
+        if ($this->quantites->contains($quantite)) {
+            $this->quantites->removeElement($quantite);
+            // set the owning side to null (unless already changed)
+            if ($quantite->getIngredient() === $this) {
+                $quantite->setIngredient(null);
+            }
+        }
+
+        return $this;
     }
 
 }

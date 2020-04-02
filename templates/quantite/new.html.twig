@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle quantité{% endblock %}
+
+{% block body %}
+    <h1>Création d'une nouvelle quantité</h1>
+
+    {{ include('quantite/_form.html.twig') }}
+
+    <a href="{{ path('quantite_index') }}">back to list</a>
+{% endblock %}

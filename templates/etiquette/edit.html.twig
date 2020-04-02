@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit etiquette{% endblock %}
+
+{% block body %}
+    <h1>Edit etiquette</h1>
+
+    {{ include('etiquette/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('etiquette') }}">back to list</a>
+
+    {{ include('etiquette/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quantité index{% endblock %}
+
+{% block body %}
+    <h1>Liste quantités</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Texte quantité</th>
+                <th>Id ingrédient</th>
+                <th>Id recette</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quantite in quantites %}
+            <tr>
+                <td>{{ quantite.id }}</td>
+                <td>{{ quantite.quantite }}</td>
+                <td>{{ quantite.ingredient }}</td>
+                <td>{{ quantite.recette }}</td>
+                <td>
+                    <a href="{{ path('quantite_show', {'id': quantite.id}) }}">show</a>
+                    <a href="{{ path('quantite_edit', {'id': quantite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('quantite_new') }}">Create new</a>
+{% endblock %}

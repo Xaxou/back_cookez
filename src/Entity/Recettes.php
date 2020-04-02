@@ -82,12 +82,6 @@ class Recettes
     private $statut;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
-     * @Groups({"types", "recettes"})
-     */
-    private $etiquettes;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"types", "recettes"})
      */
@@ -111,13 +105,26 @@ class Recettes
      */
     private $cuissons;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Quantite", mappedBy="recette")
+     * @Groups({"recettes"})
+     */
+    private $quantites;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquette", mappedBy="recettes")
+     * @Groups({"recettes"})
+     */
+    private $etiquettes;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->notes = new ArrayCollection();
-        $this->etiquettes = new ArrayCollection();
         $this->preparations = new ArrayCollection();
         $this->cuissons = new ArrayCollection();
+        $this->quantites = new ArrayCollection();
+        $this->etiquettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -271,32 +278,6 @@ class Recettes
         return $this->getNom();
     }
 
-    /**
-     * @return Collection|Etiquettes[]
-     */
-    public function getEtiquettes(): Collection
-    {
-        return $this->etiquettes;
-    }
-
-    public function addEtiquette(Etiquettes $etiquette): self
-    {
-        if (!$this->etiquettes->contains($etiquette)) {
-            $this->etiquettes[] = $etiquette;
-        }
-
-        return $this;
-    }
-
-    public function removeEtiquette(Etiquettes $etiquette): self
-    {
-        if ($this->etiquettes->contains($etiquette)) {
-            $this->etiquettes->removeElement($etiquette);
-        }
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -378,6 +359,65 @@ class Recettes
             if ($cuisson->getRecette() === $this) {
                 $cuisson->setRecette(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quantite[]
+     */
+    public function getQuantites(): Collection
+    {
+        return $this->quantites;
+    }
+
+    public function addQuantite(Quantite $quantite): self
+    {
+        if (!$this->quantites->contains($quantite)) {
+            $this->quantites[] = $quantite;
+            $quantite->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuantite(Quantite $quantite): self
+    {
+        if ($this->quantites->contains($quantite)) {
+            $this->quantites->removeElement($quantite);
+            // set the owning side to null (unless already changed)
+            if ($quantite->getRecette() === $this) {
+                $quantite->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Etiquette[]
+     */
+    public function getEtiquettes(): Collection
+    {
+        return $this->etiquettes;
+    }
+
+    public function addEtiquette(Etiquette $etiquette): self
+    {
+        if (!$this->etiquettes->contains($etiquette)) {
+            $this->etiquettes[] = $etiquette;
+            $etiquette->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtiquette(Etiquette $etiquette): self
+    {
+        if ($this->etiquettes->contains($etiquette)) {
+            $this->etiquettes->removeElement($etiquette);
+            $etiquette->removeRecette($this);
         }
 
         return $this;

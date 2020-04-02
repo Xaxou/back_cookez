@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}etiquette index{% endblock %}
+
+{% block body %}
+    <h1>Liste des étapes de pretiquetteéparation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Intitulé</th>
+                <th>Recettes</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etiquette in etiquettes %}
+            <tr>
+                <td>{{ etiquette.id }}</td>
+                <td>{{ etiquette.intitule }}</td>
+                <td>{{ etiquette.recettes }}</td>
+                <td>
+                    <a href="{{ path('etiquette_show', {'id': etiquette.id}) }}">show</a>
+                    <a href="{{ path('etiquette_edit', {'id': etiquette.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('etiquette_new') }}">Create new</a>
+{% endblock %}

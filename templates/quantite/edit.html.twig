@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer une quantité{% endblock %}
+
+{% block body %}
+    <h1>Éditer une quantité</h1>
+
+    {{ include('quantite/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('quantite_index') }}">back to list</a>
+
+    {{ include('quantite/_delete_form.html.twig') }}
+{% endblock %}

@@ -8,18 +8,16 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
 /**
- * @ApiResource(normalizationContext={"groups"={"recettes"}})
- * @ORM\Entity(repositoryClass="App\Repository\EtiquettesRepository")
+ * @ApiResource()
+ * @ORM\Entity(repositoryClass="App\Repository\EtiquetteRepository")
  */
-class Etiquettes
+class Etiquette
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"recettes"})
      */
     private $id;
 
@@ -27,10 +25,10 @@ class Etiquettes
      * @ORM\Column(type="string", length=255)
      * @Groups({"recettes"})
      */
-    private $nom;
+    private $intitule;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Recettes", mappedBy="etiquettes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Recettes", inversedBy="etiquettes")
      */
     private $recettes;
 
@@ -44,14 +42,14 @@ class Etiquettes
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getIntitule(): ?string
     {
-        return $this->nom;
+        return $this->intitule;
     }
 
-    public function setNom(string $nom): self
+    public function setIntitule(string $intitule): self
     {
-        $this->nom = $nom;
+        $this->intitule = $intitule;
 
         return $this;
     }
@@ -68,7 +66,6 @@ class Etiquettes
     {
         if (!$this->recettes->contains($recette)) {
             $this->recettes[] = $recette;
-            $recette->addEtiquette($this);
         }
 
         return $this;
@@ -78,14 +75,8 @@ class Etiquettes
     {
         if ($this->recettes->contains($recette)) {
             $this->recettes->removeElement($recette);
-            $recette->removeEtiquette($this);
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getNom();
     }
 }
