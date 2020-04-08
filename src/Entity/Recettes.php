@@ -117,6 +117,11 @@ class Recettes
      */
     private $etiquettes;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateCreation;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -419,6 +424,18 @@ class Recettes
             $this->etiquettes->removeElement($etiquette);
             $etiquette->removeRecette($this);
         }
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
