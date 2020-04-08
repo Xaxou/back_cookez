@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(attributes={
- *     "normalization_context": {"groups"={"recettes"}}, "fetchEager": true
+ *     "normalization_context": {"groups"={"recettes"}}, "fetchEager": true,
+ *     "denormalization_context": {"groups"={"recettes"}}
  * })
  * @ORM\Entity(repositoryClass="App\Repository\RecettesRepository")
  */
@@ -112,13 +113,14 @@ class Recettes
     private $quantites;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquette", mappedBy="recettes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquette", mappedBy="recette")
      * @Groups({"recettes"})
      */
     private $etiquettes;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"recettes"})
      */
     private $dateCreation;
 

@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(attributes={
- *     "normalization_context": {"groups"={"types"}}, "fetchEager": true
+ *     "normalization_context": {"groups"={"types"}}, "fetchEager": true,
+ *     "denormalization_context": {"groups"={"types"}}
  *     })
  * @ORM\Entity(repositoryClass="App\Repository\TypesRepository")
  */
@@ -22,7 +23,7 @@ class Types
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"types"})
+     * @Groups({"types","recettes"})
      */
     private $id;
 

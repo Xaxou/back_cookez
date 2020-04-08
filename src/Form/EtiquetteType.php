@@ -13,7 +13,6 @@ class EtiquetteType extends AbstractType
     {
         $builder
             ->add('intitule')
-            ->add('recettes')
         ;
     }
 

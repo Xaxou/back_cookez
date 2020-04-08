@@ -6,6 +6,7 @@ use App\Entity\Recettes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RecettesType extends AbstractType
 {
@@ -21,6 +22,8 @@ class RecettesType extends AbstractType
             ->add('type')
             ->add('ingredients')
             ->add('createur')
+            ->add('etiquettes')
+            ->add('date_creation', DateTimeType::class)
         ;
     }
 

@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="Cet utilisateur existe déjà")
  *  @ApiResource(attributes={
- *     "normalization_context": {"groups"={"users"}}, "fetchEager": true
+ *     "normalization_context": {"groups"={"user"}}, "fetchEager": true
  *   })
  */
 class User implements UserInterface
@@ -25,12 +25,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user","recettes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"types", "users"})
+     * @Groups({"types", "user"})
      */
     private $email;
 
