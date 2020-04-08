@@ -118,7 +118,7 @@ class Recettes
     private $etiquettes;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateCreation;
 
@@ -130,6 +130,7 @@ class Recettes
         $this->cuissons = new ArrayCollection();
         $this->quantites = new ArrayCollection();
         $this->etiquettes = new ArrayCollection();
+        $this->dateCreation = new DateTime();
     }
 
     public function getId(): ?int
