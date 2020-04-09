@@ -118,12 +118,6 @@ class Recettes
      */
     private $dateCreation;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
-     * @Groups({"etiquettes","recettes"})
-     */
-    private $etiquettes;
-
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -410,32 +404,6 @@ class Recettes
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Etiquettes[]
-     */
-    public function getEtiquettes(): Collection
-    {
-        return $this->etiquettes;
-    }
-
-    public function addEtiquette(Etiquettes $etiquette): self
-    {
-        if (!$this->etiquettes->contains($etiquette)) {
-            $this->etiquettes[] = $etiquette;
-        }
-
-        return $this;
-    }
-
-    public function removeEtiquette(Etiquettes $etiquette): self
-    {
-        if ($this->etiquettes->contains($etiquette)) {
-            $this->etiquettes->removeElement($etiquette);
-        }
 
         return $this;
     }

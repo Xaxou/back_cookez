@@ -120,7 +120,7 @@ class Recettes
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
-     * @Groups({"etiquettes","recettes"})
+     * @Groups({"etiquettes" })
      */
     private $etiquettes;
 

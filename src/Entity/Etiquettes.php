@@ -2,49 +2,36 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
 /**
- * @ApiResource(attributes={
- *     "normalization_context": {"groups"={"types"}}, "fetchEager": true,
- *     "denormalization_context": {"groups"={"types"}}
- *     })
- * @ORM\Entity(repositoryClass="App\Repository\TypesRepository")
+ * @ApiResource(normalizationContext={"groups"={"etiquettes", "recettes"}})
+ * @ORM\Entity(repositoryClass="App\Repository\EtiquettesRepository")
  */
-class Types
+class Etiquettes
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"types","recettes"})
+     * @Groups({"recettes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"types"})
+     * @Groups({"recettes"})
      */
-    private $nom;
+    private $intitule;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Recettes", mappedBy="type", fetch="EAGER")
-     * @Groups({"types"})
-     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Recettes", mappedBy="etiquettes")
      */
     private $recettes;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"types"})
-     */
-    private $image;
 
     public function __construct()
     {
@@ -56,14 +43,14 @@ class Types
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getIntitule(): ?string
     {
-        return $this->nom;
+        return $this->intitule;
     }
 
-    public function setNom(string $nom): self
+    public function setIntitule(string $intitule): self
     {
-        $this->nom = $nom;
+        $this->intitule = $intitule;
 
         return $this;
     }
@@ -80,7 +67,7 @@ class Types
     {
         if (!$this->recettes->contains($recette)) {
             $this->recettes[] = $recette;
-            $recette->setType($this);
+            $recette->addEtiquette($this);
         }
 
         return $this;
@@ -90,10 +77,7 @@ class Types
     {
         if ($this->recettes->contains($recette)) {
             $this->recettes->removeElement($recette);
-            // set the owning side to null (unless already changed)
-            if ($recette->getType() === $this) {
-                $recette->setType(null);
-            }
+            $recette->removeEtiquette($this);
         }
 
         return $this;
@@ -101,18 +85,6 @@ class Types
 
     public function __toString()
     {
-        return $this->getNom();
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
+        return $this->getIntitule();
     }
 }

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Étapes de etiquette{% endblock %}
+{% block title %}Etiquettes{% endblock %}
 
 {% block body %}
-    <h1>Étapes de etiquette</h1>
+    <h1>Etiquettes</h1>
 
     <table class="table">
         <tbody>
@@ -12,15 +12,15 @@
                 <td>{{ etiquette.id }}</td>
             </tr>
             <tr>
-                <th>Intitulé</th>
+                <th>Intitule</th>
                 <td>{{ etiquette.intitule }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('etiquette_index') }}">back to list</a>
+    <a href="{{ path('etiquettes_index') }}">back to list</a>
 
-    <a href="{{ path('etiquette_edit', {'id': etiquette.id}) }}">edit</a>
+    <a href="{{ path('etiquettes_edit', {'id': etiquette.id}) }}">edit</a>
 
-    {{ include('etiquette/_delete_form.html.twig') }}
+    {{ include('etiquettes/_delete_form.html.twig') }}
 {% endblock %}

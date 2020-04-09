@@ -21,8 +21,8 @@ class RecettesType extends AbstractType
             ->add('statut')
             ->add('type')
             ->add('ingredients')
-            ->add('etiquettes')
             ->add('createur')
+            ->add('etiquette')
             ->add('date_creation', DateTimeType::class)
         ;
     }

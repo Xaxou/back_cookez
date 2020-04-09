@@ -113,16 +113,16 @@ class Recettes
     private $quantites;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquette", mappedBy="recette")
+     * @Groups({"recettes", "etiquette"})
+     */
+    private $etiquettes;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Groups({"recettes"})
      */
     private $dateCreation;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
-     * @Groups({"etiquettes","recettes"})
-     */
-    private $etiquettes;
 
     public function __construct()
     {
@@ -402,6 +402,34 @@ class Recettes
         return $this;
     }
 
+    /**
+     * @return Collection|Etiquette[]
+     */
+    public function getEtiquettes(): Collection
+    {
+        return $this->etiquettes;
+    }
+
+    public function addEtiquette(Etiquette $etiquette): self
+    {
+        if (!$this->etiquettes->contains($etiquette)) {
+            $this->etiquettes[] = $etiquette;
+            $etiquette->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtiquette(Etiquette $etiquette): self
+    {
+        if ($this->etiquettes->contains($etiquette)) {
+            $this->etiquettes->removeElement($etiquette);
+            //$etiquette->removeRecette($this);
+        }
+
+        return $this;
+    }
+
     public function getDateCreation(): ?\DateTimeInterface
     {
         return $this->dateCreation;
@@ -410,32 +438,6 @@ class Recettes
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Etiquettes[]
-     */
-    public function getEtiquettes(): Collection
-    {
-        return $this->etiquettes;
-    }
-
-    public function addEtiquette(Etiquettes $etiquette): self
-    {
-        if (!$this->etiquettes->contains($etiquette)) {
-            $this->etiquettes[] = $etiquette;
-        }
-
-        return $this;
-    }
-
-    public function removeEtiquette(Etiquettes $etiquette): self
-    {
-        if ($this->etiquettes->contains($etiquette)) {
-            $this->etiquettes->removeElement($etiquette);
-        }
 
         return $this;
     }
