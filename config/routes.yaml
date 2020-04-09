@@ -10,7 +10,7 @@ authentication_token:
     
 api_recettes_ingredients:
     path: '/api/recettes_ingredients'
-    methods: ['POST']
+    methods: ['GET']
     defaults:
         _controller: '\App\Controller\ApiRoutesController::recettesByIngredients'
         _api_resource_class: 'App\Entity\Recettes'

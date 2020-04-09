@@ -22,7 +22,7 @@ class Types
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"types"})
+     * @Groups({"types", "recettes"})
      */
     private $id;
 

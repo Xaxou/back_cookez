@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="Cet utilisateur existe déjà")
+ * @UniqueEntity(fields={"email"}, message="exist")
  *  @ApiResource(attributes={
  *     "normalization_context": {"groups"={"users"}}, "fetchEager": true
  *   })
