@@ -7,7 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(attributes={
+ *     "normalization_context": {"groups"={"quantites"}}, "fetchEager": true,
+ *     "denormalization_context": {"groups"={"quantites"}}
+ * })
  * @ORM\Entity(repositoryClass="App\Repository\QuantiteRepository")
  */
 class Quantite
@@ -21,23 +24,21 @@ class Quantite
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"recettes", 
-     *          "ingredients",
-     *      })
+     * @Groups({"recettes", "ingredients", "quantites"})
      */
     private $quantite;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ingredients", inversedBy="quantites")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"recettes"})
+     * @Groups({"recettes", "quantites"})
      */
     private $ingredient;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Recettes", inversedBy="quantites")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"ingredients"})
+     * @Groups({"ingredients", "quantites"})
      */
     private $recette;
 

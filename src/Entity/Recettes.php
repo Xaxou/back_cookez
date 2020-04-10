@@ -60,6 +60,13 @@ class Recettes
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredients", inversedBy="recettes")
+     * @ORM\JoinTable(name="recettes_ingredients",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="recettes_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="ingredients_id", referencedColumnName="id")
+     *  })
      * @Groups({"types", "recettes"})
      */
     private $ingredients;
@@ -120,6 +127,13 @@ class Recettes
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Etiquettes", inversedBy="recettes")
+     * @ORM\JoinTable(name="recettes_etiquettes",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="recettes_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="etiquettes_id", referencedColumnName="id")
+     *  })
      * @Groups({"etiquettes","recettes"})
      */
     private $etiquettes;
