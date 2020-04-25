@@ -138,6 +138,11 @@ class Recettes
      */
     private $etiquettes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favoris", mappedBy="recette")
+     */
+    private $favoris;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -146,6 +151,7 @@ class Recettes
         $this->cuissons = new ArrayCollection();
         $this->quantites = new ArrayCollection();
         $this->etiquettes = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -449,6 +455,37 @@ class Recettes
     {
         if ($this->etiquettes->contains($etiquette)) {
             $this->etiquettes->removeElement($etiquette);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favoris[]
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favoris $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+            $favori->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favoris $favori): self
+    {
+        if ($this->favoris->contains($favori)) {
+            $this->favoris->removeElement($favori);
+            // set the owning side to null (unless already changed)
+            if ($favori->getRecette() === $this) {
+                $favori->setRecette(null);
+            }
         }
 
         return $this;

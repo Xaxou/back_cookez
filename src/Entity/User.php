@@ -64,10 +64,16 @@ class User implements UserInterface
      */
     private $frigo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favoris", mappedBy="user")
+     */
+    private $favoris;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,6 +233,37 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($frigo->getUtilisateur() !== $this) {
             $frigo->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favoris[]
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favoris $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+            $favori->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favoris $favori): self
+    {
+        if ($this->favoris->contains($favori)) {
+            $this->favoris->removeElement($favori);
+            // set the owning side to null (unless already changed)
+            if ($favori->getUser() === $this) {
+                $favori->setUser(null);
+            }
         }
 
         return $this;

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Favoris index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Liste des favoris</h3>
+            </div>
+            {% for favori in favoris %}
+                 <div class="col-lg-4"> 
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ favori.nom }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">ID : {{ favori.id }}</h6>
+                            <a href="{{ path('favoris_show', {'id': favori.id}) }}">Afficher</a>
+                            <a href="{{ path('favoris_edit', {'id': favori.id}) }}">Modifier</a>
+                        </div>
+                    </div>
+                 </div>
+            {% else %}
+                        
+            {% endfor %}
+            <div class="col-lg-12">
+                <a href="{{ path('favoris_new') }}">Ajouter un favori</a>
+            </div>
+                
+    </div>
+{% endblock %}
