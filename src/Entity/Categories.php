@@ -44,6 +44,12 @@ class Categories
      */
     private $ingredients;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"categories"})
+     */
+    private $image;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -100,5 +106,17 @@ class Categories
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

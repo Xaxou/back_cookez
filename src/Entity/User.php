@@ -48,13 +48,21 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Recettes", mappedBy="createur")
+     * @Groups({"user"})
      */
     private $recettes;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Notes", mappedBy="user")
+     * @Groups({"user"})
      */
     private $notes;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Frigo", mappedBy="utilisateur", cascade={"persist", "remove"})
+     * @Groups({"user"})
+     */
+    private $frigo;
 
     public function __construct()
     {
@@ -202,6 +210,23 @@ class User implements UserInterface
             if ($note->getUser() === $this) {
                 $note->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getFrigo(): ?Frigo
+    {
+        return $this->frigo;
+    }
+
+    public function setFrigo(Frigo $frigo): self
+    {
+        $this->frigo = $frigo;
+
+        // set the owning side of the relation if necessary
+        if ($frigo->getUtilisateur() !== $this) {
+            $frigo->setUtilisateur($this);
         }
 
         return $this;

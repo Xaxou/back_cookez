@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Frigo;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,10 +39,24 @@ class SecurityController extends AbstractController
             }
             $entityManager->persist($user);
             $entityManager->flush();
+            $iduser = $user->getId();
+
+
+            /** Creation du frigo ors de l'inscription */
+            $frigo = new Frigo();
+            $frigo->setNom('');
+            $frigo->setUtilisateur($user);
+            $entityManager->persist($frigo);
+            $entityManager->flush();
+            $idfrigo = $frigo->getId();
+
             $data = [
                 'status' => 201,
-                'message' => 'L\'utilisateur a été créé'
+                'message' => 'L\'utilisateur a été créé',
+                'idUser' => $iduser,
+                'iFrigo' => $idfrigo
             ];
+
             return new JsonResponse($data, 201);
         }
         $data = [
@@ -57,6 +72,7 @@ class SecurityController extends AbstractController
     public function login(Request $request)
     {
         $user = $this->getUser();
+
         return $this->json([
             'email' => $user->getUsername(),
             'roles' => $user->getRoles()
