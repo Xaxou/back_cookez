@@ -23,7 +23,8 @@ class Ingredients
      *          "recettes", 
      *          "ingredients",
      *          "catingredient", 
-     *          "types"
+     *          "types",
+     *          "frigo"
      *      })
      */
     private $id;
@@ -34,7 +35,8 @@ class Ingredients
      *          "recettes", 
      *          "ingredients",
      *          "catingredient", 
-     *          "types"
+     *          "types",
+     *          "frigo"
      *         })
      */
     private $nom;
@@ -45,7 +47,8 @@ class Ingredients
      *          "recettes", 
      *          "ingredients",
      *          "catingredient", 
-     *          "types"
+     *          "types",
+     *          "frigo"
      *         })
      */
     private $code;
