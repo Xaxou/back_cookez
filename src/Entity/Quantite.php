@@ -19,6 +19,7 @@ class Quantite
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"recettes", "quantites"})
      */
     private $id;
 

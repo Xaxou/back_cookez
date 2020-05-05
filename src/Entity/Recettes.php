@@ -102,19 +102,19 @@ class Recettes
     private $nbrPersonnes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="recette", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="recette", cascade={"remove", "persist"})
      * @Groups({"recettes"})
      */
     private $preparations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cuisson", mappedBy="recette", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Cuisson", mappedBy="recette", cascade={"remove", "persist"})
      * @Groups({"recettes"})
      */
     private $cuissons;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Quantite", mappedBy="recette", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Quantite", mappedBy="recette", cascade={"remove", "persist"})
      * @Groups({"recettes"})
      */
     private $quantites;
