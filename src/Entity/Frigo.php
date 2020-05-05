@@ -10,7 +10,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
- * @ApiResource()
+ * @ApiResource(attributes={
+ *     "normalization_context": {"groups"={"frigo"}}, "fetchEager": true,
+ *     "denormalization_context": {"groups"={"frigo"}}
+ *     })
  * @ORM\Entity(repositoryClass="App\Repository\FrigoRepository")
  */
 class Frigo
@@ -25,17 +28,20 @@ class Frigo
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"frigo"})
      */
     private $nom;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="frigo", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"frigo"})
      */
     private $utilisateur;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredients")
+     * @Groups({"frigo"})
      */
     private $ingredients;
 
