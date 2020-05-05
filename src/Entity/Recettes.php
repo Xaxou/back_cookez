@@ -23,13 +23,13 @@ class Recettes
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"types", "recettes"})
+     * @Groups({"types", "recettes", "user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"types", "recettes"})
+     * @Groups({"types", "recettes", "user"})
      */
     private $nom;
 
@@ -102,26 +102,26 @@ class Recettes
     private $nbrPersonnes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="recette")
+     * @ORM\OneToMany(targetEntity="App\Entity\Preparation", mappedBy="recette", cascade={"remove", "persist"})
      * @Groups({"recettes"})
      */
     private $preparations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cuisson", mappedBy="recette")
+     * @ORM\OneToMany(targetEntity="App\Entity\Cuisson", mappedBy="recette", cascade={"remove", "persist"})
      * @Groups({"recettes"})
      */
     private $cuissons;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Quantite", mappedBy="recette")
+     * @ORM\OneToMany(targetEntity="App\Entity\Quantite", mappedBy="recette", cascade={"remove", "persist"})
      * @Groups({"recettes"})
      */
     private $quantites;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"recettes"})
+     * @Groups({"recettes", "user"})
      */
     private $dateCreation;
 

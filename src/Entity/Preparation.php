@@ -18,6 +18,9 @@ class Preparation
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"recettes", 
+     *          "preparation",
+     * })
      */
     private $id;
 
